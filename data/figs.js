@@ -21,8 +21,8 @@ function LINE(cap,xs,series,y,xl,alt){
   for(let v=y.min;v<=y.max+1e-9;v+=y.step){b+=`<line x1="${L}" y1="${Y(v)}" x2="${L+pw}" y2="${Y(v)}" stroke-width=".5" stroke-dasharray="2 4"/>`+TX(L-6,Y(v)+4,+v.toFixed(3),"end",'font-size="11"')}
   const every=xs.length<=13?1:Math.ceil(xs.length/10);xs.forEach((x,i)=>{if(i%every===0||i===xs.length-1)b+=TX(X(i),Tp+ph+16,x,"middle",'font-size="11"')});
   b+=TX(L+pw/2,H-8,xl||"","middle",'font-size="12"')+TX(14,Tp+ph/2,y.label||"","middle",`font-size="12" transform="rotate(-90 14 ${Tp+ph/2})"`);
-  series.forEach((s,k)=>{b+=`<polyline points="${s.v.map((v,i)=>v==null?"":X(i).toFixed(1)+","+Y(v).toFixed(1)).filter(Boolean).join(" ")}" stroke-width="2.2"${s.dash?' stroke-dasharray="6 4"':""}/>`+s.v.map((v,i)=>v==null?"":`<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="2.6" fill="currentColor"/>`).join("")});
-  if(series.length>1)series.forEach((s,k)=>{const lx=L+12+k*170;b+=`<line x1="${lx}" y1="12" x2="${lx+24}" y2="12" stroke-width="2.2"${s.dash?' stroke-dasharray="6 4"':""}/>`+TX(lx+30,16,s.n,"start",'font-size="11"')});
+  series.forEach((s,k)=>{b+=`<polyline points="${s.v.map((v,i)=>v==null?"":X(i).toFixed(1)+","+Y(v).toFixed(1)).filter(Boolean).join(" ")}" stroke-width="2.2"${s.dash?` stroke-dasharray="${s.dash===true?"6 4":s.dash}"`:""}/>`+s.v.map((v,i)=>v==null?"":`<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="2.6" fill="currentColor"/>`).join("")});
+  if(series.length>1)series.forEach((s,k)=>{const lx=L+12+k*170;b+=`<line x1="${lx}" y1="12" x2="${lx+24}" y2="12" stroke-width="2.2"${s.dash?` stroke-dasharray="${s.dash===true?"6 4":s.dash}"`:""}/>`+TX(lx+30,16,s.n,"start",'font-size="11"')});
   return FIG(cap,SV(W,H,b),alt||`${cap}. ${series.map(s=>s.n+": "+xs.map((x,i)=>x+" = "+s.v[i]).join(", ")).join(". ")}`);
 }
 // vertical bar chart with optional line (e.g. climate graph): bars = [...], line = [...]
