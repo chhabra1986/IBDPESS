@@ -199,6 +199,9 @@ tr.skip td{opacity:.55}
 .pdfsheet .bf{background:#2f7d32!important}
 .pdfsheet .booklet{break-inside:auto}
 .pdfsheet .src{break-inside:avoid}
+.hlb{font-family:var(--f-mono);font-size:10.5px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 4px;margin-left:6px;vertical-align:2px}
+.chip.off{opacity:.45;cursor:not-allowed}
+.qtext{margin:0 0 8px}
 figure.fig{margin:10px 0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;display:table;max-width:100%;overflow-x:auto;color:var(--ink);background:var(--sheet)}
 figure.fig svg.dg{display:block;max-width:100%;height:auto}
 figure.fig figcaption{font-family:var(--f-ui);font-size:12.5px;color:var(--muted);margin-top:6px}
@@ -219,6 +222,7 @@ figure.fact li{margin:2px 0}
     <div class="tabs" role="tablist" aria-label="Paper type">
       <button role="tab" id="tab-p1" aria-selected="true" data-mode="p1">Paper 1</button>
       <button role="tab" id="tab-p2" aria-selected="false" data-mode="p2">Paper 2</button>
+      <button role="tab" id="tab-topic" aria-selected="false" data-mode="topic">Topic-wise</button>
     </div>
   </header>
 
@@ -232,6 +236,16 @@ figure.fact li{margin:2px 0}
       <div id="cfg-p2" class="stack" hidden>
         <h2>Paper 2 format</h2>
         <p class="hint" id="p2hint"></p>
+      </div>
+      <div id="cfg-topic" class="stack" hidden>
+        <h2>Topic-wise settings</h2>
+        <div class="row"><button class="btn small" id="tAll">Select all</button><button class="btn small" id="tNone">Clear</button></div>
+        <div class="topics" id="topicList"></div>
+        <div class="row" style="gap:14px">
+          <div class="field"><label for="tm">Quick checks</label><input type="number" id="tm" min="0" max="40" value="10"></div>
+          <div class="field"><label for="ts">Data-based</label><input type="number" id="ts" min="0" max="8" value="2"></div>
+        </div>
+        <p class="hint">Quick checks are 1-mark multiple-choice questions for self-checking (use the <b>Self-check</b> view and press <b>Check my answers</b>). Data-based questions are [10]-mark Paper 2 style questions. HL lenses and HL-only content appear when HL is selected.</p>
       </div>
       <div class="stack">
         <button class="btn primary" id="gen">Generate new paper</button>
@@ -270,5 +284,7 @@ figure.fact li{margin:2px 0}
 <script src="data/p1b.js"></script>
 <script src="data/p2a.js"></script>
 <script src="data/p2b.js"></script>
+<script src="data/p2c.js"></script>
+<script src="data/mcq.js"></script>
 <script src="app.js"></script>
 </body></html>
